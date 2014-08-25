@@ -13,7 +13,7 @@ Version
 Installation
 --------------
 
-```sh
+```
 bower install angular-api-provider
 ```
 
@@ -21,7 +21,8 @@ Usage
 ----
 
 - Add module dependency 'ngApiProvider' : `angular.module('foo', ['ngApiProvider',..])`
-- Initialize provider
+- Initialize provider:
+
         .config(function(apiProvider) {
             apiProvider.setBaseRoute('my/app/api/');
  
@@ -33,7 +34,10 @@ Usage
               route('albums/:id').
               model(app.Album);
         });
-- Use in controller
+
+
+- Use in controller:
+
         app.SongController = function($scope, $routeParams, api) {
           var songs = api.songs.get({id: $routeParams.id});
         };
