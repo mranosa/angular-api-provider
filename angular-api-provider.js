@@ -101,9 +101,8 @@ app.ApiEndpointConfig.prototype.addHttpAction = function(method, name, params, o
  */
 app.ApiEndpointConfig.prototype.enableQuery = function(name) {
   name = name || 'query';
-  this.actions[name] = angular.extend(
-    this.actions[name] || {}, {isArray: true}
-  );
+  this.actions[name] = this.actions[name] || {};
+  this.actions[name].isArray = true;
   return this;
 };
 
