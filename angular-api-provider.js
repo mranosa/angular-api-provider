@@ -85,19 +85,26 @@ app.ApiEndpointConfig.prototype.model = function(model) {
  * @param {string} method The HTTP method for the action.
  * @param {string} name The name of the action.
  * @param {Object=} params The default parameters for the action.
+ * @param {Object=} options Additional `actions` to add to the `$resource`.
  */
-app.ApiEndpointConfig.prototype.addHttpAction = function(method, name, params) {
-  this.actions[name] = {
+app.ApiEndpointConfig.prototype.addHttpAction = function(method, name, params, options) {
+  this.actions[name] = angular.extend({
     method: method.toUpperCase(),
     params: params
-  };
+  }, options);
+  return this;
 };
 
-app.ApiEndpointConfig.prototype.enableQuery = function() {
-  this.actions['query'] = {
-    method: 'GET',
-    isArray: true
-  };
+/**
+ * Adds an action to 'query' or accept an array of results to the endpoint.
+ * @param {string=} name The name of the action to accept an array.
+ */
+app.ApiEndpointConfig.prototype.enableQuery = function(name) {
+  name = name || 'query';
+  this.actions[name] = angular.extend(
+    this.actions[name] || {}, {isArray: true}
+  );
+  return this;
 };
 
 /******************************************************************************/
